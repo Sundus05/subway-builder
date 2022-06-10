@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/subway-builder/static/css/main.d6b468e2.chunk.css",
+    "main.js": "/subway-builder/static/js/main.bc310775.chunk.js",
+    "main.js.map": "/subway-builder/static/js/main.bc310775.chunk.js.map",
+    "runtime-main.js": "/subway-builder/static/js/runtime-main.1ea3df19.js",
+    "runtime-main.js.map": "/subway-builder/static/js/runtime-main.1ea3df19.js.map",
+    "static/css/2.5524535e.chunk.css": "/subway-builder/static/css/2.5524535e.chunk.css",
+    "static/js/2.71a4a330.chunk.js": "/subway-builder/static/js/2.71a4a330.chunk.js",
+    "static/js/2.71a4a330.chunk.js.map": "/subway-builder/static/js/2.71a4a330.chunk.js.map",
+    "index.html": "/subway-builder/index.html",
+    "precache-manifest.d8054838eb33051593490804995645f4.js": "/subway-builder/precache-manifest.d8054838eb33051593490804995645f4.js",
+    "service-worker.js": "/subway-builder/service-worker.js",
+    "static/css/2.5524535e.chunk.css.map": "/subway-builder/static/css/2.5524535e.chunk.css.map",
+    "static/css/main.d6b468e2.chunk.css.map": "/subway-builder/static/css/main.d6b468e2.chunk.css.map",
+    "static/js/2.71a4a330.chunk.js.LICENSE.txt": "/subway-builder/static/js/2.71a4a330.chunk.js.LICENSE.txt",
+    "static/media/7up.png": "/subway-builder/static/media/7up.a8158fef.png",
+    "static/media/mirinda.png": "/subway-builder/static/media/mirinda.5463a90a.png",
+    "static/media/pepsi.png": "/subway-builder/static/media/pepsi.eab112a6.png",
+    "static/media/Subway.css": "/subway-builder/static/media/tomato.63f7e0bc.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1ea3df19.js",
+    "static/css/2.5524535e.chunk.css",
+    "static/js/2.71a4a330.chunk.js",
+    "static/css/main.d6b468e2.chunk.css",
+    "static/js/main.bc310775.chunk.js"
+  ]
+}
