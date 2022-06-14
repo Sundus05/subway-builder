@@ -1,20 +1,49 @@
 import React from "react";
-import sodaPepsi from "../assets/pepsi.png";
-import sodasevenUp from "../assets/7up.png";
-import sodaMirinda from "../assets/mirinda.png";
-import { useState } from "react";
+import sodaPepsi from "../../assets/pepsi.png";
+import sodasevenUp from "../../assets/7up.png";
+import sodaMirinda from "../../assets/mirinda.png";
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faMinus } from '@fortawesome/free-solid-svg-icons'
+
 import "./Subway.css";
 
 const Subway = () => {
-  const [lettuce, setlettuce] = useState(0);
-  const [tomato, settomato] = useState(0);
-  const [cheese, setcheese] = useState(0);
-  const [chicken, setchicken] = useState(0);
-  const [beef, setbeef] = useState(0);
-  const [pepsi, setpepsi] = useState(0);
-  const [sevenUp, setsevenUp] = useState(0);
-  const [mirinda, setmirinda] = useState(0);
+
+  //Getting Subway from LS
+  useEffect(() => {
+    const priceData = JSON.parse(localStorage.getItem('totalPrice'));
+    const subwaysData = JSON.parse(localStorage.getItem('subways'));
+    if (priceData) setTotalPrice(priceData);
+    if (subwaysData) setSubways(subwaysData);
+  }, []);
+
+
+  const [subways, setSubways] = useState(
+    {
+      lettuce: 0,
+      tomato: 0,
+      cheese: 0,
+      chicken: 0,
+      beef: 0,
+      pepsi: 0,
+      sevenUp: 0,
+      mirinda: 0,
+    }
+  );
+
+
   const [totalPrice, setTotalPrice] = useState(0);
+
+  // To set data in LS
+  useEffect(() => {
+    // let subwayData = [];
+    // subwayData.push(subways);
+    localStorage.setItem('subways', JSON.stringify(subways));
+    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+  }, [totalPrice,subways]);
+
 
   const addRemoveIngredient = (action, ingredient) => {
     let stateValue;
@@ -23,50 +52,50 @@ const Subway = () => {
 
     switch (ingredient) {
       case "lettuce": {
-        stateValue = lettuce;
+        stateValue = subways.lettuce;
         finalPrice = totalPrice;
         price = 10;
         break;
       }
       case "tomato": {
-        stateValue = tomato;
+        stateValue = subways.tomato;
         finalPrice = totalPrice;
         price = 20;
         break;
       }
       case "cheese": {
-        stateValue = cheese;
+        stateValue = subways.cheese;
         finalPrice = totalPrice;
         price = 30;
         break;
       }
       case "chicken": {
-        stateValue = chicken;
+        stateValue = subways.chicken;
         finalPrice = totalPrice;
         price = 50;
         break;
       }
       case "beef": {
-        stateValue = beef;
+        stateValue = subways.beef;
         finalPrice = totalPrice;
         price = 60;
         break;
       }
 
       case "pepsi": {
-        stateValue = pepsi;
+        stateValue = subways.pepsi;
         finalPrice = totalPrice;
         price = 200;
         break;
       }
       case "sevenUp": {
-        stateValue = sevenUp;
+        stateValue = subways.sevenUp;
         finalPrice = totalPrice;
         price = 200;
         break;
       }
       case "mirinda": {
-        stateValue = mirinda;
+        stateValue = subways.mirinda;
         finalPrice = totalPrice;
         price = 200;
         break;
@@ -83,41 +112,40 @@ const Subway = () => {
       stateValue = stateValue - 1;
       if (stateValue >= 0) {
         finalPrice = finalPrice - price;
-        console.log(finalPrice);
       }
     }
 
     switch (ingredient) {
       case "lettuce": {
-        setlettuce(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, lettuce: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "tomato": {
-        settomato(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, tomato: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "cheese": {
-        setcheese(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, cheese: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "chicken": {
-        setchicken(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, chicken: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "beef": {
-        setbeef(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, beef: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "pepsi": {
-        setpepsi(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, pepsi: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "sevenUp": {
-        setsevenUp(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, sevenUp: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       case "mirinda": {
-        setmirinda(stateValue >= 0 ? stateValue : 0);
+        setSubways({ ...subways, mirinda: stateValue >= 0 ? stateValue : 0 });
         break;
       }
       default:
@@ -129,16 +157,13 @@ const Subway = () => {
 
 
 
-
-
   //Graphical display of added ingredients
-
   //For Meat Display
   const meatContent = (subway) => {
-    if (chicken < 0) {
+    if (subways.chicken < 0) {
       subway.push(<div className="chickenSide"></div>);
     }
-    if (beef < 0) {
+    if (subways.beef < 0) {
       subway.push(<div className="beefSide"></div>);
     }
   };
@@ -147,26 +172,26 @@ const Subway = () => {
     let subway = [];
 
     // outputting the lettuce
-    for (let i = 0; i < lettuce; i++) {
+    for (let i = 0; i < subways.lettuce; i++) {
       subway.push(<div className="lettuceSide"></div>);
     }
     // outputting the tomato
-    for (let i = 0; i < tomato; i++) {
+    for (let i = 0; i < subways.tomato; i++) {
       subway.push(<div className="tomatoSide"></div>);
     }
     // outputting the cheese
-    for (let i = 0; i < cheese; i++) {
+    for (let i = 0; i < subways.cheese; i++) {
       subway.push(<div className="cheeseSide"></div>);
     }
     //outputting the meat
-    for (let i = 0; i < chicken; i++) {
-      if (beef === 0) {
+    for (let i = 0; i < subways.chicken; i++) {
+      if (subways.beef === 0) {
         subway.push(<div className="chickenSide">{meatContent(subway)}</div>);
       }
 
     }
-    for (let i = 0; i < beef; i++) {
-      if (chicken === 0) {
+    for (let i = 0; i < subways.beef; i++) {
+      if (subways.chicken === 0) {
         subway.push(<div className="beefSide">{meatContent()}</div>);
       }
     }
@@ -174,18 +199,18 @@ const Subway = () => {
 
     if (subway.length === 0) subway.push(<p></p>);
     return subway;
+
+
   };
-
-
 
 
   //For Drink Display
   const drinkContent = () => {
-    if (pepsi > 0)
+    if (subways.pepsi > 0)
       return <img className="drinksImage" src={sodaPepsi} alt="pepsi"></img>;
-    if (sevenUp > 0)
+    if (subways.sevenUp > 0)
       return <img className="drinksImage" src={sodasevenUp} alt="sevenup"></img>;
-    if (mirinda > 0)
+    if (subways.mirinda > 0)
       return <img className="drinksImage" src={sodaMirinda} alt="mirinda"></img>;
   };
 
@@ -218,13 +243,13 @@ const Subway = () => {
                 className="ingrBtn"
                 onClick={() => addRemoveIngredient("add", "lettuce")}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "lettuce")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>
@@ -236,13 +261,13 @@ const Subway = () => {
                 className="ingrBtn"
                 onClick={() => addRemoveIngredient("add", "tomato")}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "tomato")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>
@@ -256,13 +281,13 @@ const Subway = () => {
                 className="ingrBtn"
                 onClick={() => addRemoveIngredient("add", "cheese")}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "cheese")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>
@@ -275,7 +300,7 @@ const Subway = () => {
 
           <div
             className={
-              beef === 0 ? `ingredientsWithButtons` : "none"
+              subways.beef === 0 ? `ingredientsWithButtons` : "none"
 
             }
 
@@ -286,13 +311,13 @@ const Subway = () => {
                 className="ingrBtn"
                 onClick={() => addRemoveIngredient("add", "chicken")}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "chicken")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>
@@ -301,7 +326,7 @@ const Subway = () => {
 
           <div
             className={
-              chicken === 0 ? `ingredientsWithButtons` : "none"
+              subways.chicken === 0 ? `ingredientsWithButtons` : "none"
             }
           >
             <p>BEEF</p>
@@ -310,13 +335,13 @@ const Subway = () => {
                 className="ingrBtn"
                 onClick={() => addRemoveIngredient("add", "beef")}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "beef")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
 
@@ -331,7 +356,7 @@ const Subway = () => {
 
           <div
             className={
-              mirinda === 0 && sevenUp === 0 ? `ingredientsWithButtons` : "none"
+              subways.mirinda === 0 && subways.sevenUp === 0 ? `ingredientsWithButtons` : "none"
             }
           >
             <p>PEPSI</p>
@@ -339,24 +364,24 @@ const Subway = () => {
               <button
                 className="ingrBtn"
                 onClick={() => {
-                  if (sevenUp === 0 && mirinda === 0)
+                  if (subways.sevenUp === 0 && subways.mirinda === 0)
                     addRemoveIngredient("add", "pepsi");
                 }}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "pepsi")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>
 
           <div
             className={
-              pepsi === 0 && mirinda === 0 ? `ingredientsWithButtons` : "none"
+              subways.pepsi === 0 && subways.mirinda === 0 ? `ingredientsWithButtons` : "none"
             }
           >
             <p>7UP</p>
@@ -364,24 +389,24 @@ const Subway = () => {
               <button
                 className="ingrBtn"
                 onClick={() => {
-                  if (pepsi === 0 && mirinda === 0)
+                  if (subways.pepsi === 0 && subways.mirinda === 0)
                     addRemoveIngredient("add", "sevenUp");
                 }}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
+                className="ingrBtn remove"
                 onClick={() => addRemoveIngredient("remove", "sevenUp")}
               >
-                -
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>
 
           <div
             className={
-              pepsi === 0 && sevenUp === 0 ? `ingredientsWithButtons` : "none"
+              subways.pepsi === 0 && subways.sevenUp === 0 ? `ingredientsWithButtons` : "none"
             }
           >
             <p>MIRINDA</p>
@@ -389,17 +414,16 @@ const Subway = () => {
               <button
                 className="ingrBtn"
                 onClick={() => {
-                  if (pepsi === 0 && sevenUp === 0)
+                  if (subways.pepsi === 0 && subways.sevenUp === 0)
                     addRemoveIngredient("add", "mirinda");
                 }}
               >
-                +
+                <FontAwesomeIcon icon={faPlus} />
               </button>
               <button
-                className="ingrBtn"
-                onClick={() => addRemoveIngredient("remove", "mirinda")}
-              >
-                -
+                className="ingrBtn remove"
+                onClick={() => addRemoveIngredient("remove", "mirinda")}>
+                <FontAwesomeIcon icon={faMinus} />
               </button>
             </div>
           </div>

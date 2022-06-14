@@ -1,12 +1,19 @@
 import React from "react";
 import "./App.css";
-import Subway from "./components/Subway";
+import Subway from "./components/Subway/Subway";
+import LandingPage from "./components/LandingPage/LandingPage";
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+
 
 function App() {
   return (
-    <div>
-      <Subway />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/subway-builder" element={<LandingPage/>}/>
+        <Route path="/subway-builder/subway" element={<Subway/>}/>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
