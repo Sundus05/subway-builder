@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/subway-builder/precache-manifest.d8054838eb33051593490804995645f4.js"
+  "/subway-builder/precache-manifest.1a4552d588c3bb00a79d9eb8a1bd9baa.js"
 );
 
 self.addEventListener('message', (event) => {
