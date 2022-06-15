@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 160px;
+    margin-top: 190px;
     font-size: 18px;
     font-weight: 400;
 }
@@ -32,8 +32,17 @@ button {
 }
 
 .myButton {
-    border-radius: 10px;
-    outline: none;
+    border: gray;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.myButton:hover {
+    background-color: black;
+    color: white;
+    transition: 0.2s 0.1s;
+
+
 }
 
 .right {
@@ -47,48 +56,87 @@ button {
     position: absolute;
     display: inline;
     text-align: center;
-    margin: 15%;
     font-size: 100px;
     font-weight: 800;
+    align-self: center;
+    margin-bottom: 10%;
+
 
 }
 
-p {
-    color: black;
+.tagline {
     text-decoration: none;
 }
 
-@media (max-width: 1147px) {
+@media (max-width: 1000px) {
     .homePage {
         flex-direction: column;
         justify-content: center;
+        background-color: #FEB028;
 
     }
-
     .left {
         background-color: #FEB028;
     }
-
     .right {
-        background-color: #FEB028;
+        /* background-color: #FEB028; */
+        width: 0%;
     }
-
     .center {
-        margin: 10% 20%;
-        font-size: 100px;
+        margin: 0% 30%;
+        margin-bottom: 12%;
+        font-size: 85px;
         font-weight: 700;
 
     }
 
     img {
-        width: 320px;
+        width: 280px;
     }
 
     .textSection {
-        margin-top: 550px;
+        margin-top: 480px;
+        align-items: center;
+
+    }
+
+}
+
+@media (max-width: 700px) {
+    .center {
+        margin-bottom: 20%;
+        font-size: 85px;
+        font-weight: 700;
+
+    }
+    img {
+        width: 250px;
+    }
+
+    .textSection {
+        margin-top: 470px;
+        align-items: center;
     }
 
 
+}
 
+@media (max-width: 580px) {
+    .center {
+        margin: 0% 20%;
+        margin-bottom: 30%;
+        font-size: 85px;
+        font-weight: 700;
+        align-self: center;
+
+    }
+    img {
+        width: 250px;
+    }
+
+    .textSection {
+        margin-top: 470px;
+        align-items: center;
+    }
 
 }
