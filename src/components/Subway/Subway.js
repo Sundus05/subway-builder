@@ -7,12 +7,29 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
-import { Modal, Button } from "react-bootstrap";
+import { faHomeLg } from '@fortawesome/free-solid-svg-icons'
+import { Modal } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+
 
 import "./Subway.css";
 
 const Subway = () => {
+
+
+  // Modal handling
+  const [showModal, setShow] = useState(false);
+  const handleClose = () => setShow(false) && setSubways({
+    lettuce: 0,
+    tomato: 0,
+    cheese: 0,
+    chicken: 0,
+    beef: 0,
+    pepsi: 0,
+    sevenUp: 0,
+    mirinda: 0,
+  });
+  const handleShow = () => setShow(true);
 
   // Getting Subway from LS
   useEffect(() => {
@@ -194,7 +211,7 @@ const Subway = () => {
         subway.push(<div className="beefSide">{meatContent()}</div>);
       }
     }
-    if (subway.length === 0) subway.push();
+    if (subway.length === 0) subway.push(<> <br /> </>);
     return subway;
 
 
@@ -212,11 +229,13 @@ const Subway = () => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <nav className="navBar">
         <img className="subwayLogo" src={subwayLogo}></img>
         <h6 className="navText" >Create Your Own Subway</h6>
-        <FontAwesomeIcon className="backIcon" icon={faLongArrowAltLeft} />
+        <Link to="/subway-builder">
+          <FontAwesomeIcon className="backIcon" icon={faHomeLg} size="2x" />
+        </Link>
       </nav>
 
       {/* Rendering the entire page */}
@@ -236,10 +255,6 @@ const Subway = () => {
             </div>
           </div>
 
-          <div className="priceCounter">
-            <strong>Total:</strong> Rs.{totalPrice}
-          </div>
-
           <div className="form">
             <div className="ingredientsBlock">
 
@@ -254,7 +269,7 @@ const Subway = () => {
                     className="ingrBtn"
                     onClick={() => addRemoveIngredient("add", "lettuce")}
                   >
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faPlus}/>
                   </button>
                   <button
                     className="ingrBtn remove"
@@ -438,18 +453,38 @@ const Subway = () => {
                 </div>
               </div>
             </div>
-            <Button className="ingredientsButton">Done</Button>
+            <button type="button"
+              onClick={handleShow}
+              className="btn btn-light doneButton">
+              Done
+            </button>
 
           </div>
-
-
-
         </div>
+        {totalPrice === 0 ? (
+          <Modal show={showModal} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>It's Empty!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Please add ingredients to your Subway!</Modal.Body>
+          </Modal>)
+          : (
+            <Modal show={showModal} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Woohooo!</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Your Subway is ready.</Modal.Body>
+              <Modal.Footer>
+                <div className="priceCounter">
+                  <strong>Your need to pay:</strong> Rs.{totalPrice}
+                </div>
+              </Modal.Footer>
+            </Modal>
+          )}
       </div >
+      </React.Fragment>
 
-    </>
-
-  );
+      );
 };
 
-export default Subway;
+      export default Subway;
