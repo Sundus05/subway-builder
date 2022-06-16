@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/home" element={<LandingPage/>}/>
+        <Route exact path="/" element={<LandingPage/>}/>
         <Route path="/order" element={<Subway/>}/>
       </Routes>
     </BrowserRouter>

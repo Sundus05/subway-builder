@@ -10,7 +10,7 @@ const LandingPage = () => {
             <div className="left">
                     <div className="textSection">
                         <p className="tagline">ORDER SUBWAYS THE EASY WAY!</p>
-                        <Link to="/subway-builder/subway">
+                        <Link to="/order">
                             <button type="button"
                                 class="btn btn-light" className="myButton">
                                 Build Now

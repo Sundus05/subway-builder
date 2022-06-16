@@ -233,7 +233,7 @@ const Subway = () => {
       <nav className="navBar">
         <img className="subwayLogo" src={subwayLogo}></img>
         <h6 className="navText" >Create Your Own Subway</h6>
-        <Link to="/subway-builder">
+        <Link to="/">
           <FontAwesomeIcon className="backIcon" icon={faHomeLg} size="2x" />
         </Link>
       </nav>
